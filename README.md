@@ -1,6 +1,6 @@
 # IBM Data Engineering Capstone Project
 
-In IBM Data Engineering Capstone Project. In this initiative, participants step into the shoes of a Junior Data Engineer at SoftCart, a fictional online e-Commerce company. This project offers a real-world scenario requiring the application of various data engineering techniques and technologies to solve business-related data challenges.
+In IBM Data Engineering Capstone Project, I'll step into the shoes of a Junior Data Engineer at SoftCart, a fictional online e-Commerce company. This project offers a real-world scenario requiring the application of various data engineering techniques and technologies to solve business-related data challenges.
 
 ![Data Platform Architecture](data-platform-architecture.png)
 
