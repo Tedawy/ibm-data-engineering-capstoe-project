@@ -42,16 +42,16 @@ mongoexport
 
 We can see that we have both of them,Next we will download the data `catalog.json`
 ```bash
-    wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0321EN-SkillsNetwork/nosql/catalog.json
+wget https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0321EN-SkillsNetwork/nosql/catalog.json
 ```
 
 Next, we will start mongo using the command `start_mongo`
 Now we will create the database `catalog` and its collection `electronics`
 
 ```bash
-    mongosh -u root -p PASSWORD 
-    use catalog
-    db.createCollection('electronics')
+mongosh -u root -p PASSWORD 
+use catalog
+db.createCollection('electronics')
 ```
 Next we will exit `mongosh` and use the next command to load the data in our database `catalog`
 
@@ -61,12 +61,12 @@ mongoimport -h localhost -p 27017 --db catalog --collection electronics --authen
 
 > I also used mongodb locally on docker, created a container for `mongodb`  using the following command
 > ```bash 
->    docker run --name mongodb_container -d  -p 27017:27017 -v $(pwd):/data/db mongo
+> docker run --name mongodb_container -d  -p 27017:27017 -v $(pwd):/data/db mongo
 > ```
 >
 > Next run the container using the following command 
 > ```bash
->   docker exec -it mongodb_container bash
+> docker exec -it mongodb_container bash
 > ```
 > Next, create a database named `catalog` and collection named `electronics`
 >```bash 
@@ -81,7 +81,7 @@ mongoimport -h localhost -p 27017 --db catalog --collection electronics --authen
 
 > Next to load the data, we will exit `mongosh` and use the bash for the following command
 > ```bash
->   mongoimport --uri "mongodb://localhost:27017/catalog" --collection electronics --type=json --file /data/db/catalog.json
+>mongoimport --uri "mongodb://localhost:27017/catalog" --collection electronics --type=json --file /data/db/catalog.json
 > ```
 
 ## 3. Run Queries 
@@ -90,7 +90,7 @@ To display the list of databases we can use 2 commands:
 
 - `show dbs`
 ```bash 
-    show dbs;
+show dbs;
     admin     40.00 KiB
     catalog    8.00 KiB
     config    60.00 KiB
@@ -150,13 +150,13 @@ electronics
 To create an index in mongoDb we use the command 
 
 ```bash 
-    db.electronics.createIndex( { "type" : 1} )
+db.electronics.createIndex( { "type" : 1} )
 ```
 
 and to show the index we can use the command 
 
 ```bash
-    db.electronics.getIndexes()
+db.electronics.getIndexes()
 
     [
         { v: 2, key: { _id: 1 }, name: '_id_' },
@@ -169,7 +169,7 @@ and to show the index we can use the command
 - Find the count of laptops
 
 ```bash 
-    db.electronics.count( {"type" : "laptop"} )
+db.electronics.count( {"type" : "laptop"} )
 ```
 >```bash
 >   389
@@ -177,7 +177,7 @@ and to show the index we can use the command
 
 -  Find the number of smart phones with screen size of 6 inches.
 ```bash 
-    db.electronics.find( { "type" : "smart phone", "screen size":6 } ).count()
+db.electronics.find( { "type" : "smart phone", "screen size":6 } ).count()
 ```
 >```bash
 >   8
@@ -185,7 +185,7 @@ and to show the index we can use the command
 
 -  Find out the average screen size of smart phones
 ```bash
-    db.electronics.aggregate([
+db.electronics.aggregate([
     {"$match" : {"type": "smart phone"}},
     {"$group" : {"_id" : "type" , "avg_val" : {"$avg": "$screen size"}}}
     ])
@@ -200,10 +200,10 @@ and to show the index we can use the command
 - Finally, I will export the electronics collection into a file named `electronics.csv` using on the `_id`, `type`, and `model` columns.
 
 ```bash
-    mongoexport -u root -p --authenticationDatabase admin --db catalog --collection electronics --out electronics.csv --type=csv --fields _id,type,model
+mongoexport -u root -p --authenticationDatabase admin --db catalog --collection electronics --out electronics.csv --type=csv --fields _id,type,model
 ```
 - Using Docker 
 
 >```bash
->       mongoexport --uri "mongodb://localhost:27017/catalog" --collection electronics --out electronics.csv --type=csv --fields _id type,model
+>mongoexport --uri "mongodb://localhost:27017/catalog" --collection electronics --out electronics.csv --type=csv --fields _id type,model
 >```
