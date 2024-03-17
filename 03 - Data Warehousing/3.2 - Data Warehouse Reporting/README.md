@@ -15,21 +15,6 @@ In this assignment you will:
 
 Loading the data in the tables `DimDate`, `DimCountry`, `DimCategory`, and `FactSales`
 
-- `DimDate`
-
-![DimDate](dimdate.png)
-
-- `DimCountry`
-
-![DimCountry](dimcountry.png)
-
-- DimCategory
-
-![DimCountry](dimcategory.png)
-
-- FactSales
-
-![FactSales](factsales.png)
 
 ## 2. Aggregation Queries
 
